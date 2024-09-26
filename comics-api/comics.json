@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Action Comics",
+    "issue": "1",
+    "year": "1938",
+    "rating": 10,
+    "description": "The first appearance of Superman.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/5/5a/Action_Comics_1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "Detective Comics",
+    "issue": "27",
+    "year": "1939",
+    "rating": 9,
+    "description": "The debut of Batman.",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/bc/Detective_Comics_27_%28May_1939%29.png"
+  },
+  {
+    "id": 3,
+    "title": "Amazing Fantasy",
+    "issue": "15",
+    "year": "1962",
+    "rating": 10,
+    "description": "The first appearance of Spider-Man.",
+    "imageUrl": "https://m.media-amazon.com/images/I/51+yTH-4nHL._SY466_.jpg"
+  },
+  {
+    "id": 1727382405004,
+    "title": "Swamp Thing ",
+    "issue": "20",
+    "year": "1982",
+    "rating": "7",
+    "description": "The real Swamp Thing and his duplicate clash in battle when Ho'tah Makinaw orders the pseudo-Swamp Thing to attack construction workers who have buried the Grotto of Eternal Youth. The pseudo-Swamp Thing is destroyed.",
+    "imageUrl": "https://static.wikia.nocookie.net/headhuntershorrorhouse/images/7/7e/Swamp_Thing_20.jpeg"
+  }
+]
