@@ -1,92 +1,158 @@
 import React, { useState, useEffect } from "react";
 import ComicsForm from "../src/components/ComicsForm";
-import axios from "axios"; // Axios for API requests
-import "./App.css"; // Styling using SCSS
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import "./App.css";
 import Navbar from "./components/NavBar";
 
 function App() {
   const [comics, setComics] = useState([]);
   const [comicToEdit, setComicToEdit] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Manage modal visibility
+  const [isModalOpen, setIsModalOpen] = useState(false); 
+  const [isClosing, setIsClosing] = useState(false); 
+  const [comicToDelete, setComicToDelete] = useState(null);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
 
   // Fetch comics from the server
   useEffect(() => {
     axios.get("http://localhost:5000/comics").then((response) => {
-      setComics(response.data);
+      // Ensure `read` is treated as a boolean
+      const comicsWithBooleans = response.data.map(comic => ({
+        ...comic,
+        read: comic.read === "true" || comic.read === true // Ensure proper boolean conversion
+      }));
+      setComics(comicsWithBooleans);
     });
   }, []);
 
   const addComic = (comic) => {
     axios.post("http://localhost:5000/comics", comic).then((response) => {
       setComics([...comics, response.data]);
-      setIsModalOpen(false); // Close the modal after submission
+      setIsModalOpen(false);
     });
   };
 
   const editComic = (updatedComic) => {
-    axios.put(`http://localhost:5000/comics/${updatedComic.id}`, updatedComic).then((response) => {
-      setComics(comics.map((comic) => (comic.id === updatedComic.id ? response.data : comic)));
-      setComicToEdit(null);
-      setIsModalOpen(false); // Close the modal after submission
-    });
+    axios
+      .put(`http://localhost:5000/comics/${updatedComic.id}`, updatedComic)
+      .then((response) => {
+        setComics(
+          comics.map((comic) =>
+            comic.id === updatedComic.id ? response.data : comic
+          )
+        );
+        setComicToEdit(null);
+        setIsModalOpen(false);
+      });
   };
 
-  const deleteComic = (id) => {
-    axios.delete(`http://localhost:5000/comics/${id}`).then(() => {
-      setComics(comics.filter((comic) => comic.id !== id));
-    });
+  const toggleReadStatus = (id) => {
+    const updatedComics = comics.map((comic) =>
+      comic.id === id ? { ...comic, read: !comic.read } : comic
+    );
+    setComics(updatedComics);
+
+    // Update the backend
+    const updatedComic = updatedComics.find(comic => comic.id === id);
+    axios.put(`http://localhost:5000/comics/${id}`, updatedComic);
+  };
+
+  const confirmDeleteComic = () => {
+    if (comicToDelete) {
+      axios
+        .delete(`http://localhost:5000/comics/${comicToDelete.id}`)
+        .then(() => {
+          setComics(comics.filter((comic) => comic.id !== comicToDelete.id));
+          closeDeleteModal();
+        });
+    }
+  };
+
+  const handleDeleteClick = (comic) => {
+    setComicToDelete(comic); 
+    setIsDeleteModalOpen(true); 
   };
 
   const handleEditClick = (comic) => {
     setComicToEdit(comic);
-    setIsModalOpen(true); // Open the modal when editing
+    setIsModalOpen(true); 
   };
 
   const handleAddClick = () => {
-    setComicToEdit(null); // Reset the form for adding a new comic
-    setIsModalOpen(true); // Open the modal when adding a new comic
+    setComicToEdit(null); 
+    setIsModalOpen(true); 
   };
+
+  const openModal = () => {
+    setIsClosing(false);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsClosing(true);
+    setTimeout(() => {
+      setIsModalOpen(false);
+      setIsClosing(false);
+    }, 500);
+  };
+
+  const closeDeleteModal = () => {
+    setComicToDelete(null);
+    setIsDeleteModalOpen(false);
+  };
+
+ 
 
   return (
     <div className="app">
       <Navbar handleAddClick={handleAddClick} />
 
       <div className="container">
-      <div className="comic-list">
-        {comics.length > 0 ? (
-          comics.map((comic) => (
-            <div key={comic.id} className=" card">
-              
-              <img
-                className="comic-image"
-                src={comic.imageUrl}
-                alt={comic.title}
-            
-              />
-               <div className="comic-content">
-              <h2>{comic.title}</h2>
-              <p><strong>Issue:</strong> {comic.issue}</p>
-              <p><strong>Year:</strong> {comic.year}</p>
-              <p><strong>Rating:</strong> {comic.rating}/10</p>
-              <p><strong></strong> {comic.description}</p>
+        <div className="comic-list">
+          {comics.length > 0 ? (
+            comics.map((comic) => (
+              <div key={comic.id} className="card">
+                <img className="comic-image" src={comic.imageUrl} alt={comic.title} />
+                <div className="comic-content">
+                  <h2>{comic.title} #{comic.issue}</h2>
+                  
+                  <p><strong>Release Year:</strong> {comic.year}</p>
+                  <p><strong>Rating:</strong> {comic.rating}/10</p>
+                  <p>{comic.description}</p>
+                </div>
+                <div className="button-container">
+                  <button onClick={() => handleEditClick(comic)}>
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+
+                  {/* Toggle Read Status */}
+                  <label className="read-checkbox">
+                    <input
+                      type="checkbox"
+                      checked={comic.read} 
+                      onChange={() => toggleReadStatus(comic.id)}
+                    />
+                    <span>READ ALREADY?</span>
+                  </label>
+
+                  <button onClick={() => handleDeleteClick(comic)}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </button>
+                </div>
               </div>
-              <div className="button-container">
-              <button onClick={() => handleEditClick(comic)}>Edit</button>
-              <button onClick={() => deleteComic(comic.id)}>Delete</button>
-              </div>
-            </div>
-          ))
-        ) : (
-          <p>No comics added yet.</p>
-        )}
-      </div>
+            ))
+          ) : (
+            <p>No comics added yet.</p>
+          )}
+        </div>
       </div>
 
       {/* Modal for ComicForm */}
       {isModalOpen && (
-        <div className="modal">
+        <div className={`modal ${isClosing ? "hide" : "show"}`}>
           <div className="modal-content">
-            <button className="close-button" onClick={() => setIsModalOpen(false)}>
+            <button className="close-button" onClick={closeModal}>
               &times;
             </button>
             <ComicsForm
@@ -94,6 +160,22 @@ function App() {
               editComic={editComic}
               comicToEdit={comicToEdit}
             />
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="modal show">
+          <div className="modal-content">
+            <p className="delete-text">
+              Are you sure you want to delete the comic "
+              <strong>{comicToDelete?.title} #{comicToDelete?.issue}</strong>"?
+            </p>
+            <div className="button-container">
+              <button onClick={confirmDeleteComic}>Yes, Delete</button>
+              <button onClick={closeDeleteModal}>Cancel</button>
+            </div>
           </div>
         </div>
       )}

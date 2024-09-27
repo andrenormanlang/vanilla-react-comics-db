@@ -1,0 +1,52 @@
+.read-checkbox {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .read-checkbox input {
+    margin-right: 16px;
+  }
+  
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background-color: #eee;
+    border: 2px solid #4CAF50;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+  
+  /* Hover effect */
+  input[type="checkbox"]:hover {
+    border-color: #2E7D32; /* Darker green on hover */
+    background-color: #f2f2f2; /* Light gray background on hover */
+  }
+  
+  /* Checked state with custom icon */
+  input[type="checkbox"]:checked {
+    background-color: #614caf;
+  }
+  
+  input[type="checkbox"]:checked::before {
+    content: '\2713'; /* Font Awesome Unicode for check icon */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 400; /* Ensures bold icon */
+    font-size: 14px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  
+
+  

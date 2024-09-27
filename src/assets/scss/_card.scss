@@ -9,6 +9,9 @@
   box-sizing: border-box;
 }
 
+body {
+    font-family: "AbeeZee", system-ui;
+}
 
 h1 {
   font-size: 2em;
@@ -22,14 +25,12 @@ h1 {
   margin: auto;
 }
 
-.container > * + * {
-  margin-top: 1rem;
-}
+
 
 .card {
   position: relative;
   border-radius: 10px;
-  padding: 1rem;
+
   overflow: hidden;
   max-width: 500px;
 }
@@ -41,16 +42,20 @@ h1 {
   top: 0;
   left: 0;
   width: 100%;
-  height: 10px;
+
 }
 
-@each $key, $value in util.$cardBackground {
-  .card:nth-of-type(#{$key}) {
-    @include util.set-background($value);
+/* Loop through and alternate the colors for each card */
+@for $i from 1 through 1000 {
+  .card:nth-of-type(#{$i}) {
+    // Cycle through the $cardBackground colors based on modulus operation
+    $color-index: (($i - 1) % length(util.$cardBackground)) + 1;
+    @include util.set-background(map-get(util.$cardBackground, '#{$color-index}'));
   }
 
-  .card:nth-of-type(#{$key})::before {
-    background: color.adjust($value, $blackness: 10%);
+  .card:nth-of-type(#{$i})::before {
+    $color-index: (($i - 1) % length(util.$cardBackground)) + 1;
+    background: color.adjust(map-get(util.$cardBackground, '#{$color-index}'), $blackness: 10%);
   }
 }
 
@@ -65,40 +70,3 @@ h1 {
     }
   }
 }
-
-@mixin cards($card-columns: 4, $possible-columns: 12, $flex: true){
-  
-    width: 100%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-  
-    -webkit-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    
-    > * {
-      float: left;
-      width: percentage($card-columns / $possible-columns);
-  
-      @if $flex == true {
-        > * {
-          -webkit-box-flex: 1;
-          -webkit-flex: 1 0 0%;
-          -ms-flex: 1 0 0%;
-          flex: 1 0 0%;
-          position: relative;
-          display: -webkit-box;
-          display: -webkit-flex;
-          display: -ms-flexbox;
-          display: flex;
-          -webkit-box-orient: vertical;
-          -webkit-box-direction: normal;
-          -webkit-flex-direction: column;
-          -ms-flex-direction: column;
-          flex-direction: column;
-        }
-      }
-    } 
-  
-  }

@@ -5,6 +5,7 @@ const fs = require('fs');
 const morgan = require('morgan');  // Import Morgan
 const app = express();
 
+
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -12,7 +13,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 
 // Path to the JSON file
-const comicsFile = './comics.json';
+const comicsFile = '../comics-api/data/comics.json';
 
 // Helper function to read JSON file
 const readComics = () => {
@@ -44,7 +45,9 @@ app.post('/comics', (req, res) => {
 app.put('/comics/:id', (req, res) => {
   const comics = readComics();
   const comicIndex = comics.findIndex((comic) => comic.id === parseInt(req.params.id));
+  
   if (comicIndex !== -1) {
+    // Update comic with new data, ensuring `read` is a boolean
     comics[comicIndex] = { id: parseInt(req.params.id), ...req.body };
     writeComics(comics);
     res.json(comics[comicIndex]);

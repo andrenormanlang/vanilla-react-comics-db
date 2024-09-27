@@ -1,6 +1,8 @@
 
 @use './navbar';
 @use './card';
+@use './modal';
+@use './checkbox';
 
 
 $primary-color: #4caf50;
@@ -25,6 +27,11 @@ $input-background: #f7f7f7;
 }
 
 .App {
+  background-image: url('./assets/images/background-image.svg'); /* Adjust the path based on your file structure */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
   font-family: Arial, sans-serif;
   text-align: center;
   margin: 20px;
@@ -153,51 +160,8 @@ form {
 
   button {
     @include button-style;
-    width: 48%;  // Take up almost half of the width for two buttons in a row
     margin: 0 5px;
   }
-
-
-/* Modal Styles */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Overlay effect */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
-  width: 100%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
-}
-
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
-}
-
-.close-button:hover {
-  color: #f00;
-}
-
-
 
 .comic-image {
   width: 100%;  // Make sure the image fills the card width
@@ -208,7 +172,7 @@ form {
 }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin: 10px 0;
   text-align: center;
   color: #4caf50; /* Optional: You can change the color to your liking */
@@ -217,6 +181,4 @@ h2 {
 .comic p {
   margin: 5px 0;
 }
-
-
 
