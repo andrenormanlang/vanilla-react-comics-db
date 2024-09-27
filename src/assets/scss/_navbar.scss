@@ -1,0 +1,36 @@
+/* _navbar.scss */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333; // Background color for the navbar
+    padding: 1rem 2rem;
+    z-index: 1000; // Ensures the navbar stays on top
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Adds a subtle shadow
+  
+    .navbar-title {
+      color: #fff;
+      font-size: 1.8rem;
+      font-family: 'Bangers', cursive;
+    }
+  
+    .add-comic-button {
+      background-color: #4caf50;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+  

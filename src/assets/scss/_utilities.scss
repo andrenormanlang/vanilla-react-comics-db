@@ -1,0 +1,27 @@
+/* _utilities.scss */
+
+@use "sass:color";
+
+$cardBackground: (
+  '1': rgb(168, 4, 4),
+  '2': rgb(30, 30, 155),
+  '3': black,
+  '4': gold,
+  '5': indigo,
+  '6': rgb(192, 4, 104)
+);
+
+/* Set text color based on bg */
+@function set-text-color($color) {
+  @if (color.lightness($color) > 40%) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+/* Set background & text color */
+@mixin set-background($color) {
+  background-color: $color;
+  color: set-text-color($color);
+}

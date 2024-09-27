@@ -1,0 +1,104 @@
+/*  _card.scss */
+
+@use './utilities' as util;
+@use 'sass:color';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+  text-align: center;
+}
+
+.container {
+  width: 90%;
+  max-width: 700px;
+  margin: auto;
+}
+
+.container > * + * {
+  margin-top: 1rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 10px;
+  padding: 1rem;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.card::before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+}
+
+@each $key, $value in util.$cardBackground {
+  .card:nth-of-type(#{$key}) {
+    @include util.set-background($value);
+  }
+
+  .card:nth-of-type(#{$key})::before {
+    background: color.adjust($value, $blackness: 10%);
+  }
+}
+
+@media (min-width: 500px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    > * + * {
+      margin-top: 0;
+    }
+  }
+}
+
+@mixin cards($card-columns: 4, $possible-columns: 12, $flex: true){
+  
+    width: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+  
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    
+    > * {
+      float: left;
+      width: percentage($card-columns / $possible-columns);
+  
+      @if $flex == true {
+        > * {
+          -webkit-box-flex: 1;
+          -webkit-flex: 1 0 0%;
+          -ms-flex: 1 0 0%;
+          flex: 1 0 0%;
+          position: relative;
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          -webkit-box-orient: vertical;
+          -webkit-box-direction: normal;
+          -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+          flex-direction: column;
+        }
+      }
+    } 
+  
+  }

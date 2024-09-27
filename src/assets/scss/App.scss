@@ -1,3 +1,8 @@
+
+@use './navbar';
+@use './card';
+
+
 $primary-color: #4caf50;
 $hover-color: #45a049;
 $text-color: #333;
@@ -68,39 +73,90 @@ form {
   }
 }
 
-.comic-list {
-  margin-top: 20px;
+.container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  width: 100%; // Ensure the container takes the full width of the screen
+  max-width: 1300px;
+}
 
-  .comic {
-    border: 1px solid $border-color;
-    padding: 15px;
-    margin: 10px;
-    width: 250px;
-    text-align: left;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: white;
-    border-radius: 8px;
+.comic-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); // Adjusting minimum width to 280px
+  gap: 20px;
 
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 10px;
-      color: $primary-color;
-    }
+}
 
-    p {
-      font-size: 1rem;
-      margin: 5px 0;
-    }
-
-    button {
-      @include button-style;
-      margin-right: 5px;
-    }
+@media (min-width: 576px) {
+  .comic-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
+
+@media (min-width: 768px) {
+  .comic-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .comic-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: left;
+  height: 100%;
+  width: 100%; // Allow card to take the full width of the grid column
+  margin: 10px;
+}
+
+
+ .card img {
+    width: 100%; // Ensure the image is responsive
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin: 10px 0;
+  }
+
+  p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+
+  .comic-content {
+    flex: 1;  // Allow content to grow and push the buttons down
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;  // Pushes the button container to the bottom
+  }
+
+  button {
+    @include button-style;
+    width: 48%;  // Take up almost half of the width for two buttons in a row
+    margin: 0 5px;
+  }
+
 
 /* Modal Styles */
 .modal {
@@ -141,24 +197,14 @@ form {
   color: #f00;
 }
 
-.comic {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px;
-  border-radius: 5px;
-  text-align: left;
-  width: 250px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Ensure content stays within the card */
-}
+
 
 .comic-image {
-  width: 100%; /* Make the image fill the top of the card */
-  height: auto;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  margin: 0; /* Remove margins */
-  display: block;
+  width: 100%;  // Make sure the image fills the card width
+  height: 300px;  // Set a consistent height
+  object-fit: cover;  // This ensures the image maintains its aspect ratio and covers the available space
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
 
 h2 {
@@ -172,10 +218,5 @@ h2 {
   margin: 5px 0;
 }
 
-.comic-list {
-  display: flex;
-  flex-wrap: wrap;
-
-}
 
 

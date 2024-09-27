@@ -5,7 +5,7 @@
     "issue": "1",
     "year": "1938",
     "rating": 10,
-    "description": "The first appearance of Superman.",
+    "description": "The first appearance of Superman. It features the first appearance of several comic-book heroes—most notably the Jerry Siegel and Joe Shuster creation, Superman—and sold for 10 cents (equivalent to $2 in 2023). It is widely considered to be both the beginning of the superhero genre and the most valuable comic book in the world.",
     "imageUrl": "https://upload.wikimedia.org/wikipedia/en/5/5a/Action_Comics_1.jpg"
   },
   {
@@ -14,8 +14,8 @@
     "issue": "27",
     "year": "1939",
     "rating": 9,
-    "description": "The debut of Batman.",
-    "imageUrl": "https://upload.wikimedia.org/wikipedia/en/b/bc/Detective_Comics_27_%28May_1939%29.png"
+    "description": "The debut of Batman with the story “The Case of the Chemical Syndicate” which is a bit of a whodunit to the story, a trap, a shady laboratory and of course, the beginnings of Batman’s mythology.",
+    "imageUrl": "https://mlpnk72yciwc.i.optimole.com/cqhiHLc.IIZS~2ef73/w:600/h:850/q:75/https://bleedingcool.com/wp-content/uploads/2021/05/detective-comics-27.jpg"
   },
   {
     "id": 3,
@@ -23,7 +23,7 @@
     "issue": "15",
     "year": "1962",
     "rating": 10,
-    "description": "The first appearance of Spider-Man.",
+    "description": "With issue #15 (Aug. 1962) Amazing Adult Fantasy was retitled Amazing Fantasy. This issue's lead feature introduced the superhero Spider-Man, written by Lee and drawn by Ditko, although Lee rejected Ditko's cover art and commissioned Jack Kirby to pencil a cover that Ditko inked.",
     "imageUrl": "https://m.media-amazon.com/images/I/51+yTH-4nHL._SY466_.jpg"
   },
   {
@@ -32,7 +32,7 @@
     "issue": "20",
     "year": "1982",
     "rating": "7",
-    "description": "The real Swamp Thing and his duplicate clash in battle when Ho'tah Makinaw orders the pseudo-Swamp Thing to attack construction workers who have buried the Grotto of Eternal Youth. The pseudo-Swamp Thing is destroyed.",
+    "description": "The real Swamp Thing and his duplicate clash in battle when Ho'tah Makinaw orders the pseudo-Swamp Thing to attack construction workers who have buried the Grotto of Eternal Youth. The pseudo-Swamp Thing is destroyed. This was the First issue that Alan Moore wrote but it only serves to wrap up plot threads from the previous run before beginning in earnest next issue.",
     "imageUrl": "https://static.wikia.nocookie.net/headhuntershorrorhouse/images/7/7e/Swamp_Thing_20.jpeg"
   }
 ]

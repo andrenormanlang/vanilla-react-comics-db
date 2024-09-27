@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ComicsForm from "../src/components/ComicsForm";
 import axios from "axios"; // Axios for API requests
 import "./App.css"; // Styling using SCSS
+import Navbar from "./components/NavBar";
 
 function App() {
   const [comics, setComics] = useState([]);
@@ -47,14 +48,14 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Classic Comics Database</h1>
-      <button onClick={handleAddClick}>Add Comic</button> {/* Button to trigger modal */}
+    <div className="app">
+      <Navbar handleAddClick={handleAddClick} />
 
+      <div className="container">
       <div className="comic-list">
         {comics.length > 0 ? (
           comics.map((comic) => (
-            <div key={comic.id} className="comic">
+            <div key={comic.id} className=" card">
               
               <img
                 className="comic-image"
@@ -62,18 +63,23 @@ function App() {
                 alt={comic.title}
             
               />
+               <div className="comic-content">
               <h2>{comic.title}</h2>
               <p><strong>Issue:</strong> {comic.issue}</p>
               <p><strong>Year:</strong> {comic.year}</p>
               <p><strong>Rating:</strong> {comic.rating}/10</p>
               <p><strong></strong> {comic.description}</p>
+              </div>
+              <div className="button-container">
               <button onClick={() => handleEditClick(comic)}>Edit</button>
               <button onClick={() => deleteComic(comic.id)}>Delete</button>
+              </div>
             </div>
           ))
         ) : (
           <p>No comics added yet.</p>
         )}
+      </div>
       </div>
 
       {/* Modal for ComicForm */}
