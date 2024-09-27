@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# SOK! BAM! POW! DATABASE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This is a no bullshit comic book database. You can add, edit, delete and view all the comics in the database. The front-end is built with React, Vanilla Javascript & SASS and the back-end is built with Node.js and Express. The database consists of a simple JSON file in order to store the data.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+1. Clone the repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2. Install the dependencies
 
-### `npm test`
+Please install the dependencies for both the front-end and the back-end by running the following command in the main folder and the comics-api folder.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install
+```
 
-### `npm run build`
+3. Start the server
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+cd comics-api
+npm run dev
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Start the front-end
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+npm run dev
+```
 
-### `npm run eject`
+## Usage
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Back-end
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Start the server by accessing the folder comics-api and start it by running nodemon as npm run dev. The server will start on port 5000. You can access the API by using Postman or any other API testing tool by going to http://localhost:5000/comics.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Endpoints
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+##### GET /comics
 
-## Learn More
+This endpoint returns all the comics in the database.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+##### GET /comics/:id
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This endpoint returns a single comic by its id.
 
-### Code Splitting
+##### POST /comics
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This endpoint allows you to add a new comic to the database.
 
-### Analyzing the Bundle Size
+##### POST /comics/bulk
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This endpoint allows you to add multiple comics to the database at once.
 
-### Making a Progressive Web App
+#### POST /comics/update-bulk
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+This endpoint allows you to update multiple comics at once.
 
-### Advanced Configuration
+##### PUT /comics/:id
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+This endpoint allows you to update a comic by its id.
 
-### Deployment
+##### DELETE /comics/:id
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+This endpoint allows you to delete a comic by its id.
 
-### `npm run build` fails to minify
+### Front-end
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+After you have started the mock backend server, you can head to the main folder and enter npm run dev in your terminal in order to start the front-end which will be running on port 3000. You can access the front-end by going to http://localhost:3000.
