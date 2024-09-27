@@ -9318,6 +9318,17 @@ input[type=checkbox]:checked::before {
           transform: translate(-50%, -50%);
 }
 
+/* Checkbox in Comics Form */
+.checkbox-form {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .App {
   background-image: url("./assets/images/background-image.svg");
   background-size: cover;

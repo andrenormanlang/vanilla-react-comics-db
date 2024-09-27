@@ -7,6 +7,7 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
   const [rating, setRating] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
+  const [read, setRead] = useState(false); // New state for the read status
 
   useEffect(() => {
     if (comicToEdit) {
@@ -16,6 +17,7 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
       setRating(comicToEdit.rating);
       setDescription(comicToEdit.description);
       setImageUrl(comicToEdit.imageUrl);
+      setRead(comicToEdit.read); // Set the initial value of the read checkbox when editing
     } else {
       setTitle("");
       setIssue("");
@@ -23,23 +25,25 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
       setRating("");
       setDescription("");
       setImageUrl("");
+      setRead(false); // Reset the checkbox when adding a new comic
     }
   }, [comicToEdit]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const comicData = {
+      title,
+      issue,
+      year,
+      rating,
+      description,
+      imageUrl,
+      read, // Include the read status in the data
+    };
     if (comicToEdit) {
-      editComic({
-        ...comicToEdit,
-        title,
-        issue,
-        year,
-        rating,
-        description,
-        imageUrl,
-      });
+      editComic({ ...comicToEdit, ...comicData });
     } else {
-      addComic({ title, issue, year, rating, description, imageUrl });
+      addComic(comicData);
     }
     setTitle("");
     setIssue("");
@@ -47,6 +51,7 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
     setRating("");
     setDescription("");
     setImageUrl("");
+    setRead(false); // Reset the checkbox
   };
 
   return (
@@ -84,16 +89,16 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
-        rows="5" // Adjust for more space
+        rows="5"
         style={{
-          width: "100%", // Full width
-          padding: "10px", // Add padding for better readability
-          borderRadius: "5px", // Smooth corners
-          border: "1px solid #ccc", // Light gray border
-          boxSizing: "border-box", // Ensure padding and width play nicely together
-          resize: "vertical", // Only allow vertical resizing
-          fontSize: "1rem", // Enhance readability
-          marginBottom: "15px", // Add space at the bottom
+          width: "100%",
+          padding: "10px",
+          borderRadius: "5px",
+          border: "1px solid #ccc",
+          boxSizing: "border-box",
+          resize: "vertical",
+          fontSize: "1rem",
+          marginBottom: "15px",
         }}
       />
       <input
@@ -103,7 +108,21 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
         onChange={(e) => setImageUrl(e.target.value)}
         required
       />
-      <button type="submit">{comicToEdit ? "Edit Comic" : "Add Comic"}</button>
+
+      {/* Updated checkbox and label styling */}
+      <label style={{ display: "flex", alignItems: "center", margin: "10px 0" }}>
+        <input
+          type="checkbox"
+          checked={read}
+          onChange={(e) => setRead(e.target.checked)} // Handle checkbox changes
+          style={{ marginRight: "10px" }} // Adds space between checkbox and label text
+        />
+        <span style={{ fontSize: "1rem", color: "#333" }}>Read Already?</span>
+      </label>
+
+      <button type="submit">
+        {comicToEdit ? "Edit Comic" : "Add Comic"}
+      </button>
     </form>
   );
 }
