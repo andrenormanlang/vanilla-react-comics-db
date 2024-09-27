@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const morgan = require('morgan');  // Import Morgan
+const morgan = require('morgan'); 
 const app = express();
 
 
@@ -13,7 +13,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 
 // Path to the JSON file
-const comicsFile = '../comics-api/data/comics.json';
+const comicsFile = './data/comics.json';
 
 // Helper function to read JSON file
 const readComics = () => {

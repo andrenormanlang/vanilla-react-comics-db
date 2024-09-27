@@ -30,7 +30,7 @@ npm run dev
 4. Start the front-end
 
 ```bash
-npm run dev
+npm run start
 ```
 
 ## Usage
@@ -53,14 +53,6 @@ This endpoint returns a single comic by its id.
 
 This endpoint allows you to add a new comic to the database.
 
-##### POST /comics/bulk
-
-This endpoint allows you to add multiple comics to the database at once.
-
-#### POST /comics/update-bulk
-
-This endpoint allows you to update multiple comics at once.
-
 ##### PUT /comics/:id
 
 This endpoint allows you to update a comic by its id.
@@ -72,3 +64,11 @@ This endpoint allows you to delete a comic by its id.
 ### Front-end
 
 After you have started the mock backend server, you can head to the main folder and enter npm run dev in your terminal in order to start the front-end which will be running on port 3000. You can access the front-end by going to http://localhost:3000.
+
+#### Starting the app with Docker
+
+You can also start the app with Docker by running the following command in the main folder.
+
+```bash
+docker-compose up --build
+```

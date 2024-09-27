@@ -143,7 +143,7 @@ function App() {
               </div>
             ))
           ) : (
-            <p>No comics added yet.</p>
+            <p className="no-comics-message">No comics added yet.</p>
           )}
         </div>
       </div>

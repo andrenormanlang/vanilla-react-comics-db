@@ -7,11 +7,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #070707; // Background color for the navbar
+    background-color: #070707; 
     padding: 1rem 2rem;
-    z-index: 1000; // Ensures the navbar stays on top
-   // Increase the shadow intensity and size
-   box-shadow: 0 8px 16px rgba(34, 33, 33, 0.2); 
+    z-index: 1000; 
+    box-shadow: 0 8px 16px rgba(34, 33, 33, 0.2); 
   
    .navbar-title {
     font-size: 2em;
@@ -71,12 +70,12 @@
     }
   
     .icon {
-      margin-right: 8px;  // Adds some margin between the icons and text
+      margin-right: 8px;  
       display: flex;
       align-items: center;
   
       svg {
-        margin-right: 4px;  // Adds space between the icons themselves
+        margin-right: 4px;  
       }
     }
   }

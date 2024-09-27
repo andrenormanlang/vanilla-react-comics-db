@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  comics-api:
+    build:
+      context: ./comics-api
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./comics-api/data:/usr/src/app/data  # Correctly mount the data directory
+    restart: always
+
+  frontend:
+    build:
+      context: .
+    ports:
+      - '3000:80'
+    depends_on:
+      - comics-api
+    restart: always

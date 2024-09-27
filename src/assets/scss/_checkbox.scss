@@ -26,8 +26,8 @@
   
   /* Hover effect */
   input[type="checkbox"]:hover {
-    border-color: #2E7D32; /* Darker green on hover */
-    background-color: #f2f2f2; /* Light gray background on hover */
+    border-color: #2E7D32; 
+    background-color: #f2f2f2; 
   }
   
   /* Checked state with custom icon */
@@ -38,7 +38,7 @@
   input[type="checkbox"]:checked::before {
     content: '\2713'; /* Font Awesome Unicode for check icon */
     font-family: 'Font Awesome 5 Free';
-    font-weight: 400; /* Ensures bold icon */
+    font-weight: 400; 
     font-size: 14px;
     color: white;
     position: absolute;
