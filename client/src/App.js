@@ -14,117 +14,58 @@ function App() {
   const [comicToDelete, setComicToDelete] = useState(null);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
 
-  /* For local development */
-  // // Fetch comics from the server
-  // useEffect(() => {
-  //   axios.get("http://localhost:5000/comics").then((response) => {
-  //     // Ensure `read` is treated as a boolean
-  //     const comicsWithBooleans = response.data.map(comic => ({
-  //       ...comic,
-  //       read: comic.read === "true" || comic.read === true // Ensure proper boolean conversion
-  //     }));
-  //     setComics(comicsWithBooleans);
-  //   });
-  // }, []);
+  // Get the API URL from the environment variable or use a fallback for local development
+  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-  // const addComic = (comic) => {
-  //   axios.post("http://localhost:5000/comics", comic).then((response) => {
-  //     setComics([...comics, response.data]);
-  //     setIsModalOpen(false);
-  //   });
-  // };
-
-  // const editComic = (updatedComic) => {
-  //   axios
-  //     .put(`http://localhost:5000/comics/${updatedComic.id}`, updatedComic)
-  //     .then((response) => {
-  //       setComics(
-  //         comics.map((comic) =>
-  //           comic.id === updatedComic.id ? response.data : comic
-  //         )
-  //       );
-  //       setComicToEdit(null);
-  //       setIsModalOpen(false);
-  //     });
-  // };
-
-  // const toggleReadStatus = (id) => {
-  //   const updatedComics = comics.map((comic) =>
-  //     comic.id === id ? { ...comic, read: !comic.read } : comic
-  //   );
-  //   setComics(updatedComics);
-
-  //   // Update the backend
-  //   const updatedComic = updatedComics.find(comic => comic.id === id);
-  //   axios.put(`http://localhost:5000/comics/${id}`, updatedComic);
-  // };
-
-  // const confirmDeleteComic = () => {
-  //   if (comicToDelete) {
-  //     axios
-  //       .delete(`http://localhost:5000/comics/${comicToDelete.id}`)
-  //       .then(() => {
-  //         setComics(comics.filter((comic) => comic.id !== comicToDelete.id));
-  //         closeDeleteModal();
-  //       });
-  //   }
-  // };
-
+  // Log the value of apiUrl to check if the environment variable is set correctly
+console.log("API URL:", apiUrl);
   // Fetch comics from the server
-useEffect(() => {
-  axios.get("http://comics-api:5000/comics").then((response) => {
-    // Ensure `read` is treated as a boolean
-    const comicsWithBooleans = response.data.map(comic => ({
-      ...comic,
-      read: comic.read === "true" || comic.read === true // Ensure proper boolean conversion
-    }));
-    setComics(comicsWithBooleans);
-  });
-}, []);
-
-const addComic = (comic) => {
-  axios.post("http://comics-api:5000/comics", comic).then((response) => {
-    setComics([...comics, response.data]);
-    setIsModalOpen(false);
-  });
-};
-
-const editComic = (updatedComic) => {
-  axios
-    .put(`http://comics-api:5000/comics/${updatedComic.id}`, updatedComic)
-    .then((response) => {
-      setComics(
-        comics.map((comic) =>
-          comic.id === updatedComic.id ? response.data : comic
-        )
-      );
+  useEffect(() => {
+    axios.get(`${apiUrl}/api/comics`).then((response) => {
+      const comicsWithBooleans = response.data.map(comic => ({
+        ...comic,
+        read: comic.read === "true" || comic.read === true
+      }));
+      setComics(comicsWithBooleans);
+    }).catch((error) => {
+      console.error("Error fetching comics:", error);  // Log the error for debugging
+    });
+  }, [apiUrl]);
+  
+  const addComic = (comic) => {
+    axios.post(`${apiUrl}/api/comics`, comic).then((response) => {
+      setComics([...comics, response.data]);
+      setIsModalOpen(false);
+    });
+  };
+  
+  const editComic = (updatedComic) => {
+    axios.put(`${apiUrl}/api/comics/${updatedComic.id}`, updatedComic).then((response) => {
+      setComics(comics.map((comic) => comic.id === updatedComic.id ? response.data : comic));
       setComicToEdit(null);
       setIsModalOpen(false);
     });
-};
+  };
+  
+  const toggleReadStatus = (id) => {
+    const updatedComics = comics.map((comic) =>
+      comic.id === id ? { ...comic, read: !comic.read } : comic
+    );
+    setComics(updatedComics);
 
-const toggleReadStatus = (id) => {
-  const updatedComics = comics.map((comic) =>
-    comic.id === id ? { ...comic, read: !comic.read } : comic
-  );
-  setComics(updatedComics);
+    // Update the backend
+    const updatedComic = updatedComics.find(comic => comic.id === id);
+    axios.put(`${apiUrl}/comics/${id}`, updatedComic);
+  };
 
-  // Update the backend
-  const updatedComic = updatedComics.find(comic => comic.id === id);
-  axios.put(`http://comics-api:5000/comics/${id}`, updatedComic);
-};
-
-const confirmDeleteComic = () => {
-  if (comicToDelete) {
-    axios
-      .delete(`http://comics-api:5000/comics/${comicToDelete.id}`)
-      .then(() => {
+  const confirmDeleteComic = () => {
+    if (comicToDelete) {
+      axios.delete(`${apiUrl}/api/comics/${comicToDelete.id}`).then(() => {
         setComics(comics.filter((comic) => comic.id !== comicToDelete.id));
         closeDeleteModal();
       });
-  }
-};
-
+    }
+  };
 
   const handleDeleteClick = (comic) => {
     setComicToDelete(comic); 
@@ -141,10 +82,7 @@ const confirmDeleteComic = () => {
     setIsModalOpen(true); 
   };
 
-  const openModal = () => {
-    setIsClosing(false);
-    setIsModalOpen(true);
-  };
+
 
   const closeModal = () => {
     setIsClosing(true);
@@ -158,8 +96,6 @@ const confirmDeleteComic = () => {
     setComicToDelete(null);
     setIsDeleteModalOpen(false);
   };
-
- 
 
   return (
     <div className="app">

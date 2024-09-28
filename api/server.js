@@ -27,13 +27,13 @@ const writeComics = (comics) => {
 };
 
 // GET: Fetch all comics
-app.get('/comics', (req, res) => {
+app.get('/api/comics', (req, res) => {
   const comics = readComics();
   res.json(comics);
 });
 
 // POST: Add a new comic
-app.post('/comics', (req, res) => {
+app.post('/api/comics', (req, res) => {
   const comics = readComics();
   const newComic = { id: Date.now(), ...req.body };
   comics.push(newComic);
@@ -42,12 +42,11 @@ app.post('/comics', (req, res) => {
 });
 
 // PUT: Edit an existing comic
-app.put('/comics/:id', (req, res) => {
+app.put('/api/comics/:id', (req, res) => {
   const comics = readComics();
   const comicIndex = comics.findIndex((comic) => comic.id === parseInt(req.params.id));
   
   if (comicIndex !== -1) {
-    // Update comic with new data, ensuring `read` is a boolean
     comics[comicIndex] = { id: parseInt(req.params.id), ...req.body };
     writeComics(comics);
     res.json(comics[comicIndex]);
@@ -57,7 +56,7 @@ app.put('/comics/:id', (req, res) => {
 });
 
 // DELETE: Delete a comic
-app.delete('/comics/:id', (req, res) => {
+app.delete('/api/comics/:id', (req, res) => {
   const comics = readComics();
   const updatedComics = comics.filter((comic) => comic.id !== parseInt(req.params.id));
   writeComics(updatedComics);

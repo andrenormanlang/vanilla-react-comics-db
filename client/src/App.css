@@ -20,7 +20,7 @@
           box-shadow: 0 8px 16px rgba(34, 33, 33, 0.2);
 }
 .navbar .navbar-title {
-  font-size: 2em;
+  font-size: 1.5em;
   display: inline;
   font-family: "Bangers", cursive;
 }
@@ -42,39 +42,24 @@
 .navbar .add-comic-button {
   background-color: #de2c18;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 5px;
   border: none;
   border-radius: 5px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease;
 }
 .navbar .add-comic-button:hover {
   background-color: #45a049;
 }
-
-.add-comic-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  border-radius: 5px;
-  -webkit-transition: background-color 0.3s ease;
-  transition: background-color 0.3s ease;
-}
-.add-comic-button:hover {
-  background-color: #45a049;
-}
-.add-comic-button .icon {
-  margin-right: 8px;
+.navbar .icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -82,7 +67,7 @@
       -ms-flex-align: center;
           align-items: center;
 }
-.add-comic-button .icon svg {
+.navbar .icon svg {
   margin-right: 4px;
 }
 
@@ -9392,7 +9377,7 @@ form button {
   transition: background-color 0.3s ease;
   margin-top: 15px;
   width: 100%;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 form button:hover {
   background-color: #45a049;
