@@ -15,7 +15,7 @@ function App() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
 
   // Get the API URL from the environment variable or use a fallback for local development
-  const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   console.log("API URL:", apiUrl);
   // Fetch comics from the server
