@@ -1,0 +1,21 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./api/data:/usr/src/app/data  # For JSON file storage
+    environment:
+      NODE_ENV: development
+
+  frontend:
+    build:
+      context: ./client
+    ports:
+      - '3000:80'
+    environment:
+      REACT_APP_API_URL: http://localhost:5000
+    depends_on:
+      - api
