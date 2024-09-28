@@ -17,8 +17,6 @@ function App() {
   // Get the API URL from the environment variable or use a fallback for local development
   const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
-  // Log the value of apiUrl to check if the environment variable is set correctly
-console.log("API URL:", apiUrl);
   // Fetch comics from the server
   useEffect(() => {
     axios.get(`${apiUrl}/api/comics`).then((response) => {
