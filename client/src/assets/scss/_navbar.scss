@@ -1,0 +1,82 @@
+/* _navbar.scss */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #070707; 
+    padding: 1rem 2rem;
+    z-index: 1000; 
+    box-shadow: 0 8px 16px rgba(34, 33, 33, 0.2); 
+  
+   .navbar-title {
+    font-size: 2em;
+    display: inline;
+    font-family: 'Bangers', cursive;
+  
+    .sok {
+      color: #6ff700; 
+    }
+  
+    .bam {
+      color: #33C1FF; 
+
+      margin-left: 5px;
+    }
+  
+    .pow {
+      color: #fce300; 
+       margin-left: 5px;
+    }
+  
+    .database {
+      color: #fa0c0c; 
+       margin-left: 16px;
+    }
+  }
+  
+    .add-comic-button {
+      background-color: #de2c18;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+  
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .add-comic-button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #45a049;
+    }
+  
+    .icon {
+      margin-right: 8px;  
+      display: flex;
+      align-items: center;
+  
+      svg {
+        margin-right: 4px;  
+      }
+    }
+  }
+  
