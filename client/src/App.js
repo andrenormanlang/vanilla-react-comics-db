@@ -17,6 +17,7 @@ function App() {
   // Get the API URL from the environment variable or use a fallback for local development
   const apiUrl = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
+  console.log("API URL:", apiUrl);
   // Fetch comics from the server
   useEffect(() => {
     axios.get(`${apiUrl}/api/comics`).then((response) => {
@@ -53,7 +54,7 @@ function App() {
 
     // Update the backend
     const updatedComic = updatedComics.find(comic => comic.id === id);
-    axios.put(`${apiUrl}/comics/${id}`, updatedComic);
+    axios.put(`${apiUrl}/api/comics/${id}`, updatedComic);
   };
 
   const confirmDeleteComic = () => {
