@@ -15,9 +15,9 @@ function App() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false); 
 
   // Get the API URL from the environment variable or use a fallback for local development
-  const apiUrl = process.env.REACT_APP_API_URL;
+  // const apiUrl = process.env.REACT_APP_API_URL;
+  const apiUrl = "https://dres-comics-list-api.onrender.com";
 
-  console.log("API URL:", apiUrl);
   // Fetch comics from the server
   useEffect(() => {
     axios.get(`${apiUrl}/api/comics`).then((response) => {
