@@ -8,7 +8,7 @@
   }
   
   .read-checkbox input {
-    margin-right: 16px;
+    margin-right: 0.2rem;
   }
   
 
@@ -46,7 +46,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  
+
+.margin-right-trashcan{
+  margin-right: 0.5rem;
+}  
 /* Checkbox in Comics Form */
 .checkbox-form {
   margin-top: 15px;
@@ -57,6 +60,7 @@
   border-radius: 5px; 
   cursor: pointer;
 }
+
 
 
   

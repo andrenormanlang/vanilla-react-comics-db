@@ -137,7 +137,7 @@ function App() {
                       checked={comic.read} 
                       onChange={() => toggleReadStatus(comic.id)}
                     />
-                    <span>READ ALREADY?</span>
+                    <span className="margin-right-trashcan">READ ALREADY?</span>
                   </label>
 
                   <button onClick={() => handleDeleteClick(comic)}>

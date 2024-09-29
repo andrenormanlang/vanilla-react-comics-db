@@ -9261,7 +9261,7 @@ h1 {
 }
 
 .read-checkbox input {
-  margin-right: 16px;
+  margin-right: 0.2rem;
 }
 
 input[type=checkbox] {
@@ -9301,6 +9301,10 @@ input[type=checkbox]:checked::before {
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
+}
+
+.margin-right-trashcan {
+  margin-right: 0.5rem;
 }
 
 /* Checkbox in Comics Form */
