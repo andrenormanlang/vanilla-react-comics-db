@@ -7,6 +7,7 @@ import "./App.css";
 import Navbar from "./components/NavBar";
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true); 
   const [comics, setComics] = useState([]);
   const [comicToEdit, setComicToEdit] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); 
@@ -20,15 +21,19 @@ function App() {
 
   // Fetch comics from the server
   useEffect(() => {
-    axios.get(`${apiUrl}/api/comics`).then((response) => {
-      const comicsWithBooleans = response.data.map(comic => ({
-        ...comic,
-        read: comic.read === "true" || comic.read === true
-      }));
-      setComics(comicsWithBooleans);
-    }).catch((error) => {
-      console.error("Error fetching comics:", error);  // Log the error for debugging
-    });
+    axios.get(`${apiUrl}/api/comics`)
+      .then((response) => {
+        const comicsWithBooleans = response.data.map(comic => ({
+          ...comic,
+          read: comic.read === "true" || comic.read === true
+        }));
+        setComics(comicsWithBooleans);
+        setIsLoading(false); // Set loading to false when the comics are fetched
+      })
+      .catch((error) => {
+        console.error("Error fetching comics:", error);  // Log the error for debugging
+        setIsLoading(false); // Set loading to false even if there's an error
+      });
   }, [apiUrl]);
   
   const addComic = (comic) => {
@@ -100,6 +105,12 @@ function App() {
     <div className="app">
       <Navbar handleAddClick={handleAddClick} />
 
+      {isLoading ? (
+        <div className="loading-container">
+          <div className="spinner"></div> {/* Spinner element */}
+        </div>
+      ) : (
+
       <div className="container">
         <div className="comic-list">
           {comics.length > 0 ? (
@@ -139,6 +150,7 @@ function App() {
           )}
         </div>
       </div>
+      )}
 
       {/* Modal for ComicForm */}
       {isModalOpen && (
