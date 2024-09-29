@@ -71,14 +71,14 @@ function ComicsForm({ addComic, editComic, comicToEdit }) {
         required
       />
       <input
-        type="number"
+        type="text"
         placeholder="Publication Year"
         value={year}
         onChange={(e) => setYear(e.target.value)}
         required
       />
       <input
-        type="number"
+        type="text"
         placeholder="Rating (1-10)"
         value={rating}
         onChange={(e) => setRating(e.target.value)}

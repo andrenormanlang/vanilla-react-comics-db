@@ -16,7 +16,7 @@ function App() {
 
   // Get the API URL from the environment variable or use a fallback for local development
   // const apiUrl = process.env.REACT_APP_API_URL;
-  const apiUrl = "https://dres-comics-list-api.onrender.com";
+  const apiUrl = "http://localhost:5000";
 
   // Fetch comics from the server
   useEffect(() => {
@@ -110,7 +110,7 @@ function App() {
                   <h2>{comic.title} #{comic.issue}</h2>
                   
                   <p><strong>Release Year:</strong> {comic.year}</p>
-                  <p><strong>Rating:</strong> {comic.rating}/10</p>
+                  <p><strong>Rating:</strong> {comic.rating}</p>
                   <p>{comic.description}</p>
                 </div>
                 <div className="button-container">

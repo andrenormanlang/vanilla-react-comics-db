@@ -1,31 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const fs = require('fs');
-const morgan = require('morgan'); 
+const morgan = require('morgan');
 const app = express();
-
+const comicRoutes = require('./routes/comicRoutes');
 
 // Middleware
 app.use(cors({ origin: '*' }));
 app.use(bodyParser.json());
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
-
-// Path to the JSON file
-const comicsFile = './data/comics.json';
-
-// Helper function to read JSON file
-const readComics = () => {
-  const data = fs.readFileSync(comicsFile);
-  return JSON.parse(data);
-};
-
-// Helper function to write to JSON file
-const writeComics = (comics) => {
-  fs.writeFileSync(comicsFile, JSON.stringify(comics, null, 2));
-};
-
+// Routes
+app.use('/api/comics', comicRoutes);
 
 // GET: Root endpoint with instructions
 app.get('/', (req, res) => {
@@ -135,81 +121,8 @@ app.get('/', (req, res) => {
   `);
 });
 
-
-// GET: Fetch all comics
-app.get('/api/comics', (req, res) => {
-  try {
-    const comics = readComics();
-    res.json(comics);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// GET: Fetch a single comic
-app.get('/api/comics/:id', (req, res) => {
-  try {
-    const comics = readComics();
-    const comic = comics.find((comic) => comic.id === parseInt(req.params.id));
-    
-    if (comic) {
-      res.json(comic);
-    } else {
-      res.status(404).json({ message: "Comic not found" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-
-});
-
-// POST: Add a new comic
-app.post('/api/comics', (req, res) => {
-  try {
-    const comics = readComics();
-    const comic = { id: comics.length + 1, ...req.body };
-    comics.push(comic);
-    writeComics(comics);
-    res.json(comic);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-
-});
-
-// PUT: Edit an existing comic
-app.put('/api/comics/:id', (req, res) => {
-  const comics = readComics();
-  const comicIndex = comics.findIndex((comic) => comic.id === parseInt(req.params.id));
-  
-  if (comicIndex !== -1) {
-    comics[comicIndex] = { id: parseInt(req.params.id), ...req.body };
-    writeComics(comics);
-    res.json(comics[comicIndex]);
-  } else {
-    res.status(404).json({ message: "Comic not found" });
-  }
-});
-
-// DELETE: Delete a comic
-app.delete('/api/comics/:id', (req, res) => {
-  try{
-    const comics = readComics();
-    const newComics = comics.filter((comic) => comic.id !== parseInt(req.params.id));
-    
-    if (comics.length === newComics.length) {
-      res.status(404).json({ message: "Comic not found" });
-    } else {
-      writeComics(newComics);
-      res.json({ message: "Comic deleted" });
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
-
 // Start the server
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
