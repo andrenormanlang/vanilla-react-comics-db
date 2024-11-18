@@ -122,7 +122,7 @@ function App() {
                   <h2>{comic.title} #{comic.issue}</h2>
                   
                   <p><strong>Release Year:</strong> {comic.year}</p>
-                  <p><strong>Rating:</strong> {comic.rating}</p>
+                  <p><strong>My Rating:</strong> {comic.rating}</p>
                   <p>{comic.description}</p>
                 </div>
                 <div className="button-container">
