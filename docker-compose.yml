@@ -2,16 +2,17 @@ version: '3.9'
 services:
   comics-api:
     build:
-      context: ./comics-api
+      context: ./api  # Changed to match your directory structure for the backend
     ports:
       - '5000:5000'
     volumes:
-      - ./comics-api/data:/usr/src/app/data  # Correctly mount the data directory
+      - ./api/data:/usr/src/app/data  # Ensure correct path to the data directory
     restart: always
 
   frontend:
     build:
-      context: .
+      context: ./client
+      dockerfile: Dockerfile  # Dockerfile is in the client directory
     ports:
       - '3000:80'
     depends_on:
